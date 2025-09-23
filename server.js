@@ -13,8 +13,10 @@ app.use(express.static('public'));
 
 // conexao com redis
 const redisClient = redis.createClient({
-    host: process.env.REDIS_HOST || 'redis-service',
-    port: process.env.REDIS_PORT || 6379
+    socket: {
+        host: process.env.REDIS_HOST || 'redis',
+        port: process.env.REDIS_PORT || 6379
+    }
 });
 
 redisClient.on('error', (err) => {
@@ -24,6 +26,9 @@ redisClient.on('error', (err) => {
 redisClient.on('connect', () => {
     console.log('conectado ao redis!');
 });
+
+// conectar ao redis
+redisClient.connect().catch(console.error);
 
 // funcao para simular carga de cpu quando necessario
 function simulateCpuLoad() {
