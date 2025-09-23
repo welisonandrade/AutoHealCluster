@@ -4,10 +4,10 @@ Aplicação distribuída para demonstração de tolerância a falhas e monitoram
 
 ## Estrutura do Projeto
 
-- `server.js` - Servidor Node.js com API REST
-- `public/index.html` - Interface web do cliente
-- `k8s/` - Manifestos do Kubernetes
-- `monitoring/` - Configurações do Prometheus
+- `server/` - Código do servidor (API REST)
+- `client/` - Interface web do cliente  
+- `kubernetes/` - Configurações do Kubernetes
+- `prometheus/` - Configurações do Prometheus
 
 ## Como Executar
 
@@ -27,20 +27,20 @@ minikube start
 
 ```bash
 # Deploy do Redis
-kubectl apply -f k8s/redis-deployment.yaml
+kubectl apply -f kubernetes/redis-deployment.yaml
 
 # Deploy da aplicação
-kubectl apply -f k8s/todo-app-deployment.yaml
+kubectl apply -f kubernetes/todo-app-deployment.yaml
 
 # Deploy do HPA
-kubectl apply -f k8s/hpa.yaml
+kubectl apply -f kubernetes/hpa.yaml
 ```
 
 ### 4. Deploy do Prometheus
 
 ```bash
 # Deploy do Prometheus
-kubectl apply -f monitoring/prometheus-deployment.yaml
+kubectl apply -f prometheus/prometheus-deployment.yaml
 ```
 
 ### 5. Acessar a aplicação

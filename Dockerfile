@@ -5,13 +5,16 @@ FROM node:18-alpine
 WORKDIR /app
 
 # copiar package.json primeiro (para cache das dependencias)
-COPY package*.json ./
+COPY server/package*.json ./
 
 # instalar dependencias
 RUN npm install
 
-# copiar resto dos arquivos
-COPY . .
+# copiar arquivos do servidor
+COPY server/ ./
+
+# copiar cliente para pasta public
+COPY client/ ./public/
 
 # expor porta 3000
 EXPOSE 3000
